@@ -10,62 +10,15 @@ from typing import List
 from typing import Optional
 from typing import Tuple
 
+import libs
+import libs.init
+import libs.init.init
 
-class Init:
-    json_path: str = './.env.json'
-
-    @staticmethod
-    def __logging() -> None:
-        logging.basicConfig(
-            format='[%(asctime)s] [%(levelname)-8s] %(message)s',
-            level=logging.INFO,
-            datefmt='%Y-%m-%d %H:%M:%S')
-
-    @staticmethod
-    def __greet() -> None:
-        logging.debug('hi')
-
-    @staticmethod
-    def __exit() -> None:
-        atexit.register(lambda: logging.debug('hi'))
-
-    @staticmethod
-    @functools.cache
-    def json() -> Dict:
-        path: str = Init.json_path
-        logging.debug('Loaded %s', path)
-
-        fs = open(path, 'r')
-
-        obj: Dict = json.load(fs)
-        return obj
-
-    @staticmethod
-    def exec() -> None:
-        Init.__logging()
-        Init.__greet()
-        Init.__exit()
-        Init.json()
+import libs.form
 
 
-def init() -> None:
-    Init.exec()
-
-
-class Util:
-    @staticmethod
-    def __pretty_print(d) -> str:
-        return json.dumps(d, indent=2)
-
-    @staticmethod
-    def data(data) -> None:
-        print(Util.__pretty_print(data))
-
-    @staticmethod
-    def form() -> List[Tuple[str, str]]:
-        obj: Dict[str, str] = Init.json()['form']
-
-        return [(x, obj[x]) for x in obj.keys()]
+data = libs.init.init.exec()
+form = libs.form.exec(data)
 
 
 class Payload:
@@ -76,17 +29,17 @@ class Payload:
 
     @staticmethod
     def __login() -> None:
-        d = Init.json()
-        data = Util.form()
+        global form
+
         param = {
-            'r': d['query']
+            'r': data['query']
         }
 
         Payload.s.post(
             Payload.l,
             params=param,
-            data=data,
-            headers=d['header']
+            data=form,
+            headers=data['header']
         )
 
     @staticmethod
@@ -98,7 +51,6 @@ class Payload:
 
 
 def main() -> None:
-    init()
     print(Payload.get())
 
 
