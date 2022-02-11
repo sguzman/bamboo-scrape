@@ -1,4 +1,4 @@
-import functools
+import pickle
 import requests
 from typing import Dict
 from typing import List
@@ -10,17 +10,20 @@ log_url: str = f'{base_path}/login.php'
 
 
 def exec(
-        session: requests.Session,
         query: str,
         headers: Dict[str, str],
-        form: List[Tuple[str, str]]) -> None:
-    param = {
+        data: List[Tuple[str, str]]) -> requests.Session:
+    params = {
         'r': query
     }
 
+    session: requests.Session = requests.Session()
+
     session.post(
         log_url,
-        params=param,
-        data=form,
+        params=params,
+        data=data,
         headers=headers
     )
+
+    return session
