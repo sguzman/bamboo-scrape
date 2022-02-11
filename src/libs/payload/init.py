@@ -16,8 +16,6 @@ def exec(data: Dict) -> str:
     headers: Dict[str, str] = data['headers']
     form_data: List[Tuple[str, str]] = libs.form.exec(data)
 
-    session: requests.Session = requests.Session()
-
-    login.exec(session, query, headers, form_data)
+    session: requests.Session = login.exec(query, headers, form_data)
 
     return get.exec(session)
