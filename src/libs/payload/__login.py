@@ -9,7 +9,6 @@ base_path: str = 'https://growpublicschools.bamboohr.com'
 log_url: str = f'{base_path}/login.php'
 
 
-@functools.cache
 def exec(
         query: str,
         headers: Dict[str, str],

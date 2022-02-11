@@ -1,19 +1,9 @@
 import libs
-import libs.init
-import libs.init.init
-
-import libs.form
-
-import libs.payload
-import libs.payload.init
-
-
-data = libs.init.init.exec()
-out = libs.payload.init.exec(data)
+import libs.func
 
 
 def main() -> None:
-    print(out)
+    print(libs.func.exec())
 
 
 if __name__ == '__main__':
