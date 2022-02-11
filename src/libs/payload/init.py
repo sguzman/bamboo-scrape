@@ -1,3 +1,5 @@
+import requests
+
 from typing import Dict
 from typing import List
 from typing import Tuple
@@ -14,6 +16,8 @@ def exec(data: Dict) -> str:
     headers: Dict[str, str] = data['headers']
     form_data: List[Tuple[str, str]] = libs.form.exec(data)
 
-    login.exec(query, headers, form_data)
+    session: requests.Session = requests.Session()
 
-    return get.exec()
+    login.exec(session, query, headers, form_data)
+
+    return get.exec(session)

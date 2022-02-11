@@ -10,6 +10,7 @@ log_url: str = f'{base_path}/login.php'
 
 
 def exec(
+        session: requests.Session,
         query: str,
         headers: Dict[str, str],
         form: List[Tuple[str, str]]) -> None:
@@ -17,7 +18,7 @@ def exec(
         'r': query
     }
 
-    requests.post(
+    session.post(
         log_url,
         params=param,
         data=form,
