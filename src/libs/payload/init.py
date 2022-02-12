@@ -4,7 +4,7 @@ from typing import Dict
 from typing import List
 from typing import Tuple
 
-from . import __login as login
+from . import __load as load
 from . import __get as get
 
 import libs
@@ -16,6 +16,6 @@ def exec(data: Dict) -> str:
     headers: Dict[str, str] = data['headers']
     form_data: List[Tuple[str, str]] = libs.form.exec(data)
 
-    session: requests.Session = login.exec(query, headers, form_data)
+    session: requests.Session = load.exec(query, headers, form_data)
 
     return get.exec(session)
