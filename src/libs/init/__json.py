@@ -4,7 +4,7 @@ import logging
 from typing import Dict
 
 
-__json_path: str = './.env/env.json'
+__json_path: str = './.env/config/env.json'
 
 
 @functools.cache

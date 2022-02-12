@@ -10,7 +10,7 @@ import libs
 import libs.write_as_bytes
 
 
-__json_path: str = './.env/session.pickled'
+__json_path: str = './.env/state/session.pickled'
 
 
 def exec(session: requests.Session) -> None:

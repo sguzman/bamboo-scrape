@@ -11,7 +11,7 @@ import libs
 import libs.read_as_bytes
 
 
-__json_path: str = './.env/session.pickled'
+__json_path: str = './.env/state/session.pickled'
 
 
 @functools.cache
